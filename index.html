@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>O‘qish rejalashtirgichi</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div>
+          <div class="brand">O‘qish reja</div>
+          <div class="sub-brand">Universitet vazifalari</div>
+        </div>
+
+        <div class="summary-cards">
+          <div class="card mini-card">
+            <span class="label">Jami vazifa</span>
+            <strong id="totalTasks">0</strong>
+          </div>
+          <div class="card mini-card">
+            <span class="label">Yaqin muddat</span>
+            <strong id="dueSoonCount">0</strong>
+          </div>
+          <div class="card mini-card">
+            <span class="label">Muddati o‘tgan</span>
+            <strong id="overdueCount">0</strong>
+          </div>
+          <div class="card mini-card score-card">
+            <span class="label">Vazifa o‘rtachasi</span>
+            <strong id="avgScore">0%</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Bosh sahifa</p>
+            <h1>O‘qishlarim nazorati</h1>
+          </div>
+          <nav class="view-tabs" aria-label="Bo‘limlar">
+            <button id="plannerTab" class="view-tab active" type="button">Reja</button>
+            <button id="ratingTab" class="view-tab" type="button">Reytingim</button>
+          </nav>
+        </header>
+
+        <div id="plannerView">
+        <section class="panel sync-panel planner-only">
+          <div class="section-header">
+            <div>
+              <h2>eStudy portaliga kirish</h2>
+              <p class="sync-help">Login va parolni kiriting. Ma’lumotlar portalga kirgandan keyin ko‘rinadi; parol saqlanmaydi.</p>
+            </div>
+            <span id="syncStatus" class="sync-status">Hali sinxronlanmagan</span>
+          </div>
+          <form id="syncForm" class="sync-form">
+            <label>
+              <span>Portal logini</span>
+              <input type="text" id="portalUsername" autocomplete="off" required />
+            </label>
+            <label>
+              <span>Portal paroli</span>
+              <input type="password" id="portalPassword" autocomplete="off" required />
+            </label>
+            <button type="submit" id="syncButton" class="primary-btn">Kirish va vazifalarni olish</button>
+          </form>
+          <p id="syncMessage" class="sync-message" role="status"></p>
+        </section>
+
+        <section class="panel planner-only authenticated-only">
+          <div class="section-header">
+            <h2>Vazifalar va muddatlar</h2>
+            <div class="filters">
+              <button class="chip active" data-filter="all">Hammasi</button>
+              <button class="chip" data-filter="due-soon">Yaqin muddat</button>
+              <button class="chip" data-filter="overdue">Muddati o‘tgan</button>
+              <button class="chip" data-filter="done">Bajarilgan</button>
+            </div>
+          </div>
+          <div id="taskList" class="task-list"></div>
+        </section>
+
+        <section class="panel calendar-panel planner-only authenticated-only">
+          <div class="section-header">
+            <h2>Kalendar</h2>
+            <div class="month-switcher">
+              <button class="nav-btn" id="prevMonthBtn" aria-label="Oldingi oy">←</button>
+              <strong id="calendarMonthLabel"></strong>
+              <button class="nav-btn" id="nextMonthBtn" aria-label="Keyingi oy">→</button>
+            </div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </section>
+        <p class="data-note planner-only authenticated-only">Vazifalar va ballar shu brauzerda saqlanadi. Yangilash uchun portalga qayta kiring.</p>
+        </div>
+
+        <section id="ratingView" class="hidden">
+          <section class="panel">
+            <div class="section-header">
+              <div>
+                <h2>Reytingim</h2>
+                <p class="sync-help">Portalda ko‘ringan ballar oxirgi sinxronlash paytida olinadi.</p>
+              </div>
+              <span id="gradeSyncStatus" class="sync-status">Hali baho olinmagan</span>
+            </div>
+            <div id="courseRatings" class="course-ratings"></div>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <template id="taskItemTemplate">
+      <article class="task-item">
+        <div class="task-main">
+          <div class="task-header-row">
+            <h3 class="task-name"></h3>
+            <span class="badge"></span>
+          </div>
+          <div class="task-meta">
+            <span class="course"></span>
+            <span class="date"></span>
+          </div>
+        </div>
+        <div class="task-actions"><span class="score-pill"></span></div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
